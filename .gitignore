@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# IDE and Editor folders
+.idea/       # IntelliJ/PhpStorm
+.vscode/     # Visual Studio Code
+
+# System files
+.DS_Store    # macOS folder metadata
+Thumbs.db    # Windows image file cache
+
+# API Server spec
+/api.yaml
