@@ -4,5 +4,7 @@ module.exports = {
     'stylelint-config-recommended-scss',
     'stylelint-prettier/recommended',
   ],
-  rules: {},
+  rules: {
+    'import-notation': null
+  },
 };

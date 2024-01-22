@@ -38,10 +38,18 @@ module.exports = {
           // In production, extract CSS into separate files using MiniCssExtractPlugin
           // In development, inject CSS to the DOM using style-loader
           isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader', /// allows importing CSS from JS
-          'sass-loader', // compiles .scss to .css
+          'css-loader', // allows importing CSS from JS
           'postcss-loader', // post-processing of CSS
+          'sass-loader', // compiles .scss to .css
         ],
+      },
+      // Fonts
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext][query]'
+        }
       },
     ],
   },
