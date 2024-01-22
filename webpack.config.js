@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -52,6 +53,15 @@ module.exports = {
       template: 'src/index.html',
     }),
     new MiniCssExtractPlugin(),
+    ...(isProduction
+      ? [
+          new CopyPlugin({
+            patterns: [
+              { from: 'src/assets/robots.txt', to: 'robots.txt' },
+            ],
+          }),
+        ]
+      : []),
   ],
   optimization: {
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
