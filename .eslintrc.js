@@ -22,12 +22,6 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
-    {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -36,5 +30,6 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     quotes: ['error', 'single', { avoidEscape: true }],
+    'max-len': ['error', { code: 120 }],
   },
 };
