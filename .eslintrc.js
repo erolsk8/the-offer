@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['standard-with-typescript', 'prettier'],
+  extends: ['prettier'],
   plugins: ['prettier'],
   overrides: [
     {
@@ -13,6 +13,13 @@ module.exports = {
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
+      },
+    },
+    {
+      files: ['*.ts'],
+      extends: ['standard-with-typescript', 'prettier'],
+      parserOptions: {
+        project: './tsconfig.json',
       },
     },
     {
