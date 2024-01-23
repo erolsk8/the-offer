@@ -1,8 +1,14 @@
 $mobile-width: 425px;
 $tablet-width: 768px;
-$tablet-width-max: $tablet-width - 1px;
-$desktop-width: 1024px;
-$desktop-width-max: $desktop-width - 1px;
+//$tablet-width-max: $tablet-width - 1px;
+//$desktop-width: 1024px;
+//$desktop-width-max: $desktop-width - 1px;
+
+@mixin mobile {
+  @media (min-width: #{$mobile-width}) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media (min-width: #{$tablet-width}) {
@@ -10,14 +16,15 @@ $desktop-width-max: $desktop-width - 1px;
   }
 }
 
-@mixin tablet-only {
-  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width-max}) {
-    @content;
-  }
-}
+// TODO: Remove if not used
+//@mixin tablet-only {
+//  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width-max}) {
+//    @content;
+//  }
+//}
 
-@mixin desktop {
-  @media (min-width: #{$desktop-width}) {
-    @content;
-  }
-}
+//@mixin desktop {
+//  @media (min-width: #{$desktop-width}) {
+//    @content;
+//  }
+//}
