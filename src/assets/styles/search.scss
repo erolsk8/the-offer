@@ -1,0 +1,67 @@
+@import './partials';
+
+$input-height: 3rem;
+$input-spacing-v: 0.5rem;
+$input-spacing-h: 1rem;
+$input-icon-size: 1.5rem;
+
+.address-form {
+  width: 100%;
+  max-width: 500px;
+  padding: $spacing 0;
+  margin: 0 auto;
+
+  label {
+    display: block;
+    padding: 0.5rem $input-spacing-h;
+  }
+}
+
+.address-fields-holder {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.address-input-holder {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  height: $input-height;
+
+  .address-input-field {
+    flex-grow: 1;
+    border-radius: ($input-height * 0.5);
+    border: 2px solid $color-primary;
+    padding: $input-spacing-v ($input-spacing-h + $input-icon-size) $input-spacing-v $input-spacing-h;
+  }
+
+  .address-reset-button {
+    position: absolute;
+    right: $input-spacing-h;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $input-icon-size;
+    height: $input-icon-size;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+}
+
+.address-submit-button {
+  border-radius: ($input-height * 0.5);
+  border: 2px solid transparent;
+  background-color: $color-primary;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: $input-spacing-v $input-spacing-h;
+
+  &:hover {
+    border-color: $color-primary;
+    background-color: #fff;
+    color: $color-primary;
+  }
+}

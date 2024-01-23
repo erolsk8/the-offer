@@ -51,10 +51,50 @@
         </header>
 
         <main class="main" aria-label="Main content">
-            <section class="centered-content hero-section">
-                <h1>Welcome to The Offer</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <section class="centered-content main-section">
+                <div class="hero">
+                    <h1>Welcome to The Offer</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                    </p>
+                    <p>
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </p>
+                </div>
+                <div class="address-form">
+                    <form>
+                        <label for="address-input-field">Please enter your address</label>
+                        <div class="address-fields-holder">
+                            <div class="address-input-holder">
+                                <input
+                                    type="text"
+                                    id="address-input-field"
+                                    class="address-input-field"
+                                    placeholder="Street, house, zip code..."
+                                    aria-label="Please enter your address"
+                                />
+                                <button
+                                    id="js-address-reset-button"
+                                    class="address-reset-button"
+                                    aria-label="Reset Address"
+                                    type="reset"
+                                >
+                                    <img src="images/xmark.svg" alt="Reset Address" width="32" height="32" />
+                                </button>
+                            </div>
+                            <button
+                                id="js-address-submit-button"
+                                class="address-submit-button"
+                                aria-label="Check"
+                                type="submit"
+                            >
+                                Check
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </section>
         </main>
 

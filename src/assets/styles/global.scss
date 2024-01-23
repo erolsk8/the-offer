@@ -8,15 +8,26 @@ html {
   font-size: 16px;
 }
 
-body {
+body,
+input,
+button {
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
   background: $color-background;
   color: $color-text;
   margin: 0;
 }
 
+input,
+button {
+  font-size: 0.875rem;
+}
+
 img {
   max-width: 100%;
+  height: auto;
 }
 
 a {

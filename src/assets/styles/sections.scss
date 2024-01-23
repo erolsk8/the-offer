@@ -1,5 +1,4 @@
-@import './partials/variables';
-@import './partials/utils';
+@import './partials';
 
 .main {
   min-height: calc(100vh - 72px);
@@ -10,31 +9,10 @@
   margin: 0 auto;
 }
 
-.hero-section {
+.main-section {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
   padding: $spacing;
-
-  h1 {
-    font-size: 2rem;
-    margin: 1rem 0;
-  }
-
-  p {
-    max-width: 500px;
-    margin: 0.5rem auto;
-  }
-
-  @include mobile {
-    padding: $spacing * 2;
-  }
-
-  @include tablet {
-    h1 {
-      font-size: 3rem;
-    }
-  }
 }
