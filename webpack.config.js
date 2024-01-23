@@ -45,7 +45,7 @@ module.exports = {
       },
       // Fonts
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[name][ext][query]'
@@ -61,15 +61,12 @@ module.exports = {
       template: 'src/index.html',
     }),
     new MiniCssExtractPlugin(),
-    ...(isProduction
-      ? [
-          new CopyPlugin({
-            patterns: [
-              { from: 'src/assets/robots.txt', to: 'robots.txt' },
-            ],
-          }),
-        ]
-      : []),
+    new CopyPlugin({
+      patterns: [
+        // Copy everything from `public` dir into the root of build dir (`dist`)
+        { from: 'public', to: '' },
+      ],
+    }),
   ],
   optimization: {
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
