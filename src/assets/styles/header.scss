@@ -1,7 +1,5 @@
-@import './colors';
-@import './utils';
-
-$spacing: 1.5rem;
+@import './partials/variables';
+@import './partials/utils';
 
 .header {
   border-bottom: 1px solid $color-light-gray;
@@ -13,8 +11,6 @@ $spacing: 1.5rem;
   justify-content: space-between;
   align-items: center;
   padding: $spacing;
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 .header .logo {
@@ -93,9 +89,7 @@ $spacing: 1.5rem;
 
   a {
     display: block;
-    text-decoration: none;
-    color: $color-text;
-    padding: 0.75rem;
+    padding: 0.312rem;
     margin: 0 $spacing;
 
     @include tablet {

@@ -1,6 +1,4 @@
-@import './colors';
-@import './fonts';
-@import './header';
+@import './partials/variables';
 
 * {
   box-sizing: border-box; // set universal box-sizing
@@ -19,4 +17,13 @@ body {
 
 img {
   max-width: 100%;
+}
+
+a {
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -1,0 +1,79 @@
+@import './partials/variables';
+@import './partials/utils';
+
+.footer {
+  background-color: $color-lightest-gray;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing;
+  padding: $spacing * 2;
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-title {
+  position: relative;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 1rem 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: $color-text;
+    opacity: 0.8;
+    left: 50%;
+    bottom: 0;
+    height: 1px;
+    width: 40px;
+    margin-left: -20px;
+  }
+
+  @include tablet {
+    text-align: left;
+
+    &::after {
+      left: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+
+  @include tablet {
+    align-items: flex-start;
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: center;
+  gap: $spacing;
+
+  a {
+    display: inline-block;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
