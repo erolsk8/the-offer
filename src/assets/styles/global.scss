@@ -1,5 +1,22 @@
+@import './colors';
 @import './fonts';
+@import './header';
+
+* {
+  box-sizing: border-box; // set universal box-sizing
+}
+
+html {
+  font-size: 16px;
+}
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background: $color-background;
+  color: $color-text;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
 }
