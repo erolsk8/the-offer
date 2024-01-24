@@ -64,13 +64,14 @@
                     </p>
                 </div>
                 <div class="address-form">
-                    <form>
-                        <label for="address-input-field">Please enter your address</label>
+                    <form id="js-address-form">
+                        <label for="js-address-input-field">Please enter your address</label>
                         <div class="address-fields-holder">
                             <div class="address-input-holder">
                                 <input
                                     type="text"
-                                    id="address-input-field"
+                                    name="street"
+                                    id="js-address-input-field"
                                     class="address-input-field"
                                     placeholder="Street, house, zip code..."
                                     aria-label="Please enter your address"
@@ -93,8 +94,10 @@
                                 Check
                             </button>
                         </div>
+                        <div id="js-address-errors" class="address-errors"></div>
                     </form>
                 </div>
+                <div class="offers" id="js-offers"></div>
             </section>
         </main>
 
