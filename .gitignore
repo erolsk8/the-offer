@@ -5,12 +5,12 @@ node_modules/
 dist/
 
 # IDE and Editor folders
-.idea/       # IntelliJ/PhpStorm
-.vscode/     # Visual Studio Code
+.idea/
+.vscode/
 
 # System files
-.DS_Store    # macOS folder metadata
-Thumbs.db    # Windows image file cache
+.DS_Store
+Thumbs.db
 
 # API Server spec
 /api.yaml

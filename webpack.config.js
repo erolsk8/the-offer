@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
   entry: './src/index.ts',
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -60,7 +60,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
     new CopyPlugin({
       patterns: [
         // Copy everything from `public` dir into the root of build dir (`dist`)
