@@ -2,7 +2,7 @@
 @import './partials/utils';
 
 .footer {
-  background-color: $color-lightest-gray;
+  background-color: $color-lightest-bg;
 }
 
 .footer-content {
@@ -27,7 +27,7 @@
   &::after {
     content: '';
     position: absolute;
-    background-color: $color-dark;
+    background-color: $color-default-text;
     opacity: 0.8;
     left: 50%;
     bottom: 0;

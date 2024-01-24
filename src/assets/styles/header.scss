@@ -2,8 +2,8 @@
 @import './partials/utils';
 
 .header {
-  border-bottom: 1px solid $color-light-gray;
-  box-shadow: 0 -4px 10px $color-light-gray;
+  border-bottom: 1px solid $color-light-ascent;
+  box-shadow: 0 -4px 10px $color-light-ascent;
 }
 
 .header-content {
@@ -55,8 +55,8 @@
   right: -100%;
   height: 100svh;
   width: 300px;
-  background-color: $color-light;
-  border-left: 1px solid $color-light-gray;
+  background-color: $color-default-bg;
+  border-left: 1px solid $color-light-ascent;
   transition: right 0.3s ease-in-out;
   z-index: 100;
 
