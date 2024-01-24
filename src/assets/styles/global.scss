@@ -15,8 +15,8 @@ button {
 }
 
 body {
-  background: $color-background;
-  color: $color-text;
+  background: $color-light;
+  color: $color-dark;
   margin: 0;
 }
 
@@ -31,7 +31,7 @@ img {
 }
 
 a {
-  color: $color-text;
+  color: $color-dark;
   text-decoration: none;
 
   &:hover {

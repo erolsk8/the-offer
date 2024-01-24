@@ -1,8 +1,17 @@
-$color-background: #fff;
-$color-text: #212121;
-
+// All colors
 $color-primary: #1c5b70;
+$color-primary-contrast: #fff;
+
+$color-danger: #b40130;
+
+$color-light: #fff;
+$color-dark: #212121;
 $color-lightest-gray: #f0f2f2;
 $color-light-gray: #dcdbdb;
 
+// Common spacing values
 $spacing: 1.25rem;
+$field-height: 3rem;
+$field-spacing-v: 0.5rem;
+$field-spacing-h: 1rem;
+$field-icon-size: 1.5rem;

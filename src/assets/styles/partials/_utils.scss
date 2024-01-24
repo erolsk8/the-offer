@@ -1,30 +1,30 @@
-$mobile-width: 425px;
-$tablet-width: 768px;
-//$tablet-width-max: $tablet-width - 1px;
-//$desktop-width: 1024px;
-//$desktop-width-max: $desktop-width - 1px;
+@import './variables';
 
 @mixin mobile {
-  @media (min-width: #{$mobile-width}) {
+  @media (width >= 425px) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: #{$tablet-width}) {
+  @media (width >= 768px) {
     @content;
   }
 }
 
-// TODO: Remove if not used
-//@mixin tablet-only {
-//  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width-max}) {
-//    @content;
-//  }
-//}
+@mixin btn() {
+  display: inline-block;
+  border-radius: ($field-height * 0.5);
+  border: 2px solid transparent;
+  background-color: $color-primary;
+  color: $color-primary-contrast;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: $field-spacing-v $field-spacing-h;
 
-//@mixin desktop {
-//  @media (min-width: #{$desktop-width}) {
-//    @content;
-//  }
-//}
+  &:hover {
+    border-color: $color-primary;
+    background-color: $color-primary-contrast;
+    color: $color-primary;
+  }
+}
