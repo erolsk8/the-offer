@@ -1,1 +1,1 @@
-import '../styles/footer.scss';
+import '../styles/lazy-footer.scss';

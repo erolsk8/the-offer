@@ -1,15 +1,12 @@
-@import './partials';
+@import '../partials';
 
-.address-form {
-  width: 100%;
-  max-width: 500px;
-  padding: $spacing 0;
-  margin: 0 auto;
+.offers-section {
+  padding: ($spacing * 3) $spacing;
+}
 
-  label {
-    display: block;
-    padding: 0.5rem $field-spacing-h;
-  }
+.address-label {
+  display: block;
+  padding: 0.5rem $field-spacing-h;
 }
 
 .address-fields-holder {
@@ -46,11 +43,38 @@
 }
 
 .address-submit-button {
-  @include btn;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .address-errors p {
   font-size: 0.875rem;
   color: $color-danger;
   margin: 0.5rem $field-spacing-h;
+}
+
+// Offer results / cards
+.offer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacing;
+  padding: $spacing 0;
+}
+
+.offer-card {
+  flex: 1 1 auto;
+  max-width: 400px;
+  border: 1px solid $color-light-gray;
+  border-radius: 4px;
+  padding: $spacing;
+  margin: $spacing 0 0;
+
+  h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
 }

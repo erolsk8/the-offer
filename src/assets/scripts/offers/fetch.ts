@@ -1,10 +1,5 @@
-import type {
-  Offer,
-  OfferResponseFailure,
-  OfferFetchFailureResult,
-  OfferFetchSuccessResult,
-  LogErrorDetails,
-} from './types';
+import type { Offer, OfferResponseFailure, OfferFetchFailureResult, OfferFetchSuccessResult } from './types';
+import { logError, logResponseError } from './helpers';
 
 const API_SERVER_BASE_URL = 'http://localhost:8000';
 
@@ -14,21 +9,6 @@ const API_SERVER_BASE_URL = 'http://localhost:8000';
 const messages = {
   fetchErrorGeneral: 'Provided address could not be processed, please try again.',
   fetchErrorAddressTooLong: 'Provided address is too long, please try again.',
-};
-
-/**
- * In real use case, this might push log to external service,
- * silence output (staging vs prod), etc.
- */
-const logError = (message: string, errorDetails?: LogErrorDetails): void => {
-  console.error(message, errorDetails ?? '');
-};
-
-/**
- * Log error message with response details.
- */
-const logResponseError = (res: Response, message: string, errorDetails?: LogErrorDetails): void => {
-  logError(`[${res.status}] [${res.statusText}] ${message}`, errorDetails);
 };
 
 /**

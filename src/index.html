@@ -50,22 +50,23 @@
             </div>
         </header>
 
-        <main class="main" aria-label="Main content">
-            <section class="centered-content main-section">
-                <div class="hero">
-                    <h1>Welcome to The Offer</h1>
+        <main>
+            <section class="hero-section">
+                <div class="centered-content-small">
+                    <h1>Find Your Ideal Broadband Plan</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
+                        Experience lightning-fast internet speeds tailored to your needs. Start your journey to seamless
+                        connectivity now!
                     </p>
                     <p>
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
+                        <a href="#find-offers-section" class="btn">Find Offers</a>
                     </p>
                 </div>
-                <div class="address-form">
+            </section>
+            <section class="offers-section" id="find-offers-section" aria-label="Main content">
+                <div class="centered-content-small">
                     <form id="js-address-form">
-                        <label for="js-address-input-field">Please enter your address</label>
+                        <label class="address-label" for="js-address-input-field">Please enter your address</label>
                         <div class="address-fields-holder">
                             <div class="address-input-holder">
                                 <input
@@ -87,7 +88,7 @@
                             </div>
                             <button
                                 id="js-address-submit-button"
-                                class="address-submit-button"
+                                class="btn address-submit-button"
                                 aria-label="Check"
                                 type="submit"
                             >
@@ -97,7 +98,7 @@
                         <div id="js-address-errors" class="address-errors"></div>
                     </form>
                 </div>
-                <div class="offers" id="js-offers"></div>
+                <div class="offer-cards" id="js-offer-cards"></div>
             </section>
         </main>
 

@@ -1,6 +1,5 @@
-import '../../styles/offers.scss';
-
 import type { Offer } from './types';
+import { formatPrice } from './helpers';
 import { fetchOffers } from './fetch';
 
 const MIN_ADDRESS_LENGTH = 5;
@@ -43,13 +42,13 @@ const validateAddress = (address: string): string => {
  * Insert provided offers in DOM.
  */
 const renderOffers = (offers: Offer[]): void => {
-  const offersSection = document.getElementById('js-offers');
-  if (offersSection === null) {
+  const offersEl = document.getElementById('js-offer-cards');
+  if (offersEl === null) {
     return;
   }
 
   // Clear previous results
-  offersSection.innerHTML = '';
+  offersEl.innerHTML = '';
 
   // TODO: Consider SSR, templating engine, Web Components, or something better than this.
   offers.forEach((offer) => {
@@ -57,11 +56,14 @@ const renderOffers = (offers: Offer[]): void => {
     offerCard.className = 'offer-card';
     offerCard.innerHTML = `
       <h3>${offer.name}</h3>
-      <p>${offer.price}</p>
+      <p>
+      <span class="price-value">${formatPrice(offer.price)}</span>
+      <span class="price-period">/ month</span>
+      </p>
       <p>${offer.description}</p>
-      <a href="https://example.com/order" target="_blank">Order</a>
+      <a class="btn" href="https://example.com/order" target="_blank">Order</a>
     `;
-    offersSection.appendChild(offerCard);
+    offersEl.appendChild(offerCard);
   });
 };
 
@@ -100,16 +102,16 @@ const handleAddressSubmit = async (address: string): Promise<void> => {
 };
 
 export function initOffers(): void {
-  const addressForm = document.getElementById('js-address-form') as HTMLFormElement | null;
-  const addressInput = document.getElementById('js-address-input-field') as HTMLInputElement | null;
+  const addressFormEl = document.getElementById('js-address-form') as HTMLFormElement | null;
+  const addressInputEl = document.getElementById('js-address-input-field') as HTMLInputElement | null;
 
-  if (addressForm === null || addressInput === null) {
+  if (addressFormEl === null || addressInputEl === null) {
     return;
   }
 
-  addressForm.addEventListener('submit', (event) => {
+  addressFormEl.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    void handleAddressSubmit(addressInput.value);
+    void handleAddressSubmit(addressInputEl.value);
   });
 }
