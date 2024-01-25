@@ -99,6 +99,16 @@
                     </form>
                 </div>
                 <div class="centered-content offer-cards" id="js-offer-cards"></div>
+                <script id="js-offer-template" type="text/x-mustache-template">
+                  <div class="offer-card{{#isHighlighted}} is-highlighted{{/isHighlighted}}">
+                    <h3>{{name}}</h3>
+                    <div class="offer-price"><span>{{price}}</span> / month</div>
+                    <p>{{description}}</p>
+                    <div class="offer-cta">
+                      <a class="btn order-btn" href="https://example.com/order" target="_blank">Order Now</a>
+                    </div>
+                  </div>
+                </script>
             </section>
         </main>
 

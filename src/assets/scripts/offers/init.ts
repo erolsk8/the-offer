@@ -1,5 +1,6 @@
 import '../../styles/sections/offers.scss';
 
+import { render } from 'mustache';
 import type { Offer } from './types';
 import { formatPrice, sortOffers } from './helpers';
 import { fetchOffers } from './fetch';
@@ -46,7 +47,8 @@ const validateAddress = (address: string): string => {
  */
 const renderOffers = (offers: Offer[]): void => {
   const offersEl = document.getElementById('js-offer-cards');
-  if (offersEl === null) {
+  const offerTemplateEl = document.getElementById('js-offer-template');
+  if (offersEl === null || offerTemplateEl === null) {
     return;
   }
 
@@ -58,23 +60,17 @@ const renderOffers = (offers: Offer[]): void => {
   // Clear previous results
   offersEl.innerHTML = '';
 
-  // TODO: Consider SSR, templating engine, Web Components, or something better than this.
+  // TODO: In the end, check if it would help to fetch external template
+  const offerTemplate = offerTemplateEl.innerHTML;
+
   sortOffers(offers).forEach((offer, i) => {
-    const offerCard = document.createElement('div');
-    offerCard.className = 'offer-card';
-
-    // Highlight first cart if it's not the only one
-    if (i === 0 && offers.length !== 1) {
-      offerCard.classList.add('is-highlighted');
-    }
-
-    offerCard.innerHTML = `
-      <h3>${offer.name}</h3>
-      <div class="offer-price"><span>${formatPrice(offer.price)}</span> / month</div>
-      <p>${offer.description}</p>
-      <div class="offer-cta"><a class="btn" href="https://example.com/order" target="_blank">Order Now</a></div>
-    `;
-    offersEl.appendChild(offerCard);
+    offersEl.innerHTML += render(offerTemplate, {
+      name: offer.name,
+      price: formatPrice(offer.price),
+      description: offer.description,
+      // Highlight first cart if it's not the only one
+      isHighlighted: i === 0 && offers.length !== 1,
+    });
   });
 };
 
@@ -91,7 +87,7 @@ const updateErrorEl = (message: string): void => {
 };
 
 /**
- * Validate provided address and fetch offers.
+ * Handle submitting address.
  */
 const handleAddressSubmit = async (address: string): Promise<void> => {
   // Clear previous error
