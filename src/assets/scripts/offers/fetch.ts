@@ -1,5 +1,5 @@
 import type { Offer, OfferResponseFailure, OfferFetchFailureResult, OfferFetchSuccessResult } from './types';
-import { logError, logResponseError } from './helpers';
+import { simulateDelay, logError, logResponseError } from './helpers';
 
 const API_SERVER_BASE_URL = 'http://localhost:8000';
 
@@ -17,6 +17,8 @@ const messages = {
  */
 export async function fetchOffers(address: string): Promise<OfferFetchSuccessResult | OfferFetchFailureResult> {
   try {
+    await simulateDelay();
+
     const res = await fetch(`${API_SERVER_BASE_URL}/offers?address=${encodeURIComponent(address)}`, {
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,14 @@
 import type { Offer, LogErrorDetails } from './types';
 
 /**
+ * Simple random delay up to 3 seconds.
+ */
+export async function simulateDelay(): Promise<void> {
+  const delay = Math.random() * 3000;
+  await new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+/**
  * Format price to show currency and commas.
  */
 export function formatPrice(amountInCents: number): string {
