@@ -2,6 +2,8 @@
 @import './partials/utils';
 
 .header {
+  position: relative;
+  z-index: 1;
   border-bottom: 1px solid $color-light-ascent;
   box-shadow: 0 -4px 10px $color-light-ascent;
 }

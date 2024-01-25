@@ -7,7 +7,8 @@ const API_SERVER_BASE_URL = 'http://localhost:8000';
  * User-facing messages
  */
 const messages = {
-  fetchErrorGeneral: 'Provided address could not be processed, please try again.',
+  // For cases when user can not do much to resolve the issue
+  fetchErrorGeneral: 'Your request could not be processed. Please try again later.',
   fetchErrorAddressTooLong: 'Provided address is too long, please try again.',
 };
 

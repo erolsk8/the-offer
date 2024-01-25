@@ -1,5 +1,7 @@
+import '../../styles/sections/offers.scss';
+
 import type { Offer } from './types';
-import { formatPrice } from './helpers';
+import { formatPrice, sortOffers } from './helpers';
 import { fetchOffers } from './fetch';
 
 const MIN_ADDRESS_LENGTH = 5;
@@ -11,6 +13,7 @@ const messages = {
   addressErrorLetters: `Address needs to contain at least ${MIN_ADDRESS_LENGTH} letters.`,
   addressErrorNumber: 'Address must include a number.',
   addressErrorSpace: 'Address must include a space.',
+  addressNoOffers: 'No offers were found for the provided address, please try again.',
 };
 
 /**
@@ -47,21 +50,29 @@ const renderOffers = (offers: Offer[]): void => {
     return;
   }
 
+  if (offers.length === 0) {
+    offersEl.innerHTML = `<div class="no-offers">${messages.addressNoOffers}</div>`;
+    return;
+  }
+
   // Clear previous results
   offersEl.innerHTML = '';
 
   // TODO: Consider SSR, templating engine, Web Components, or something better than this.
-  offers.forEach((offer) => {
+  sortOffers(offers).forEach((offer, i) => {
     const offerCard = document.createElement('div');
     offerCard.className = 'offer-card';
+
+    // Highlight first cart if it's not the only one
+    if (i === 0 && offers.length !== 1) {
+      offerCard.classList.add('is-highlighted');
+    }
+
     offerCard.innerHTML = `
       <h3>${offer.name}</h3>
-      <p>
-      <span class="price-value">${formatPrice(offer.price)}</span>
-      <span class="price-period">/ month</span>
-      </p>
+      <div class="offer-price"><span>${formatPrice(offer.price)}</span> / month</div>
       <p>${offer.description}</p>
-      <a class="btn" href="https://example.com/order" target="_blank">Order</a>
+      <div class="offer-cta"><a class="btn" href="https://example.com/order" target="_blank">Order Now</a></div>
     `;
     offersEl.appendChild(offerCard);
   });
