@@ -56,4 +56,8 @@ a {
     color: $color-primary;
     text-decoration: none;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }

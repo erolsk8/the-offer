@@ -62,6 +62,10 @@
   transition: right 0.3s ease-in-out;
   z-index: 100;
 
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   @include tablet {
     position: static;
     display: flex;
