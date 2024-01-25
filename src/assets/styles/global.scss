@@ -57,6 +57,13 @@ a {
     text-decoration: none;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $color-light-ascent;
+    border-color: $color-light-ascent;
+    color: $color-default-text;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }

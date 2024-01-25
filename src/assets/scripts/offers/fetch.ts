@@ -1,15 +1,16 @@
 import type { Offer, OfferResponseFailure, OfferFetchFailureResult, OfferFetchSuccessResult } from './types';
-import { simulateDelay, logError, logResponseError } from './helpers';
+import { logError, logResponseError } from './logger';
+import { messages } from './messages';
 
+// Would normally come from .env file or some other config
 const API_SERVER_BASE_URL = 'http://localhost:8000';
 
 /**
- * User-facing messages
+ * Simple random delay up to 3 seconds.
  */
-const messages = {
-  // For cases when user can not do much to resolve the issue
-  fetchErrorGeneral: 'Your request could not be processed. Please try again later.',
-  fetchErrorAddressTooLong: 'Provided address is too long, please try again.',
+const simulateDelay = async (): Promise<void> => {
+  const delay = Math.random() * 3000;
+  await new Promise((resolve) => setTimeout(resolve, delay));
 };
 
 /**

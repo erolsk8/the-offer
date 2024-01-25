@@ -20,4 +20,4 @@ export interface OfferFetchSuccessResult {
   data: Offer[];
 }
 
-export type LogErrorDetails = Error | string | object;
+export type LogDetails = Error | string | object;
