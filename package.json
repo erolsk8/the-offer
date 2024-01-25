@@ -5,10 +5,11 @@
   "author": "Erol Zivina",
   "main": "./src/index.ts",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "dev": "webpack serve --mode development",
+    "start": "npm run build && npm run serve",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "serve": "node server/serve.js",
-    "lint": "eslint 'src/**/*.{js,ts}' 'server/**/*.js' && stylelint 'src/**/*.{css,scss}'",
+    "lint": "eslint 'src/**/*.ts' 'server/**/*.js' && stylelint 'src/**/*.scss'",
     "prepare": "husky install"
   },
   "devDependencies": {

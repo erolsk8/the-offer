@@ -25,10 +25,13 @@ Run `npm install` in the project root directory to install all necessary depende
 
 Following scripts are available:
 
-* `npm run start`
+* `npm run dev`
   - Launches the webpack development server with hot reloading enabled.
   - Use this command for development purposes.
   - Served at http://localhost:8001.
+
+* `npm run start`
+  - Handy shortcut to run `build` and `serve` scripts (described below).
 
 * `npm run build`
   - Builds the website for production to the `dist` folder. 
