@@ -100,14 +100,24 @@
                 </div>
                 <div class="centered-content offer-cards" id="js-offer-cards"></div>
                 <script id="js-offer-template" type="text/x-mustache-template">
-                  <div class="offer-card{{#isHighlighted}} is-highlighted{{/isHighlighted}}">
-                    <h3>{{name}}</h3>
-                    <div class="offer-price"><span>{{price}}</span> / month</div>
-                    <p>{{description}}</p>
-                    <div class="offer-cta">
-                      <a class="btn order-btn" href="https://example.com/order" target="_blank">Order Now</a>
+                    <div class="offer-card{{#isHighlighted}} is-highlighted{{/isHighlighted}} js-offer">
+                        <h3>{{name}}</h3>
+                        <div class="offer-price"><span>{{price}}</span> / month</div>
+                        <button class="read-more-button js-toggle-description" aria-expanded="false">
+                            Learn More
+                            <img
+                                class="toggle-icon js-toggle-icon"
+                                src="images/nav-arrow-down.svg"
+                                alt="Toggle Description Icon"
+                                width="24"
+                                height="24"
+                            />
+                        </button>
+                        <div class="offer-description js-description"><p>{{description}}</p></div>
+                        <div class="offer-cta">
+                            <a class="btn order-btn" href="https://example.com/order" target="_blank">Order Now</a>
+                        </div>
                     </div>
-                  </div>
                 </script>
             </section>
         </main>

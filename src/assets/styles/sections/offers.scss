@@ -88,8 +88,54 @@
     }
   }
 
+  .read-more-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+  }
+
+  .toggle-icon {
+    transition: transform 0.3s ease;
+    margin-left: 0.25rem;
+
+    &.is-expanded {
+      transform: rotate(180deg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .offer-description {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition:
+      opacity 0.3s ease,
+      max-height 0.3s ease;
+
+    p {
+      padding: 0.5rem 0.25rem;
+      margin: 0;
+    }
+
+    &.is-expanded {
+      visibility: visible;
+      opacity: 1;
+      max-height: 100px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
   .offer-cta {
-    margin-top: 1.25rem;
+    margin-top: 1rem;
   }
 
   &.is-highlighted {

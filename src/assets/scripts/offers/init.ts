@@ -75,6 +75,36 @@ const renderOffers = (offers: Offer[]): void => {
 };
 
 /**
+ * Handle events in offers DOM.
+ */
+const handleOffersEvents = (offersEl: HTMLDivElement): void => {
+  const readMoreBtn = offersEl.closest('.js-toggle-description');
+  if (readMoreBtn === null) {
+    return;
+  }
+  const offerEl = readMoreBtn.closest('.js-offer');
+  if (offerEl === null) {
+    return;
+  }
+
+  // Toggle description
+  const description = offerEl.querySelector('.js-description');
+  if (description !== null) {
+    description.classList.toggle('is-expanded');
+  }
+
+  // Toggle icon
+  const toggleIcon = offerEl.querySelector('.js-toggle-icon');
+  if (toggleIcon !== null) {
+    toggleIcon.classList.toggle('is-expanded');
+  }
+
+  // Update aria-expanded attribute
+  const isExpanded = description?.classList.contains('is-expanded');
+  readMoreBtn.setAttribute('aria-expanded', String(isExpanded));
+};
+
+/**
  * Clear or set new address error message.
  */
 const updateErrorEl = (message: string): void => {
@@ -111,8 +141,9 @@ const handleAddressSubmit = async (address: string): Promise<void> => {
 export function initOffers(): void {
   const addressFormEl = document.getElementById('js-address-form') as HTMLFormElement | null;
   const addressInputEl = document.getElementById('js-address-input-field') as HTMLInputElement | null;
+  const offersEl = document.getElementById('js-offer-cards');
 
-  if (addressFormEl === null || addressInputEl === null) {
+  if (addressFormEl === null || addressInputEl === null || offersEl === null) {
     return;
   }
 
@@ -120,5 +151,10 @@ export function initOffers(): void {
     event.preventDefault();
 
     void handleAddressSubmit(addressInputEl.value);
+  });
+
+  // Add event listener only once
+  offersEl.addEventListener('click', (event) => {
+    handleOffersEvents(event.target as HTMLDivElement);
   });
 }
