@@ -1,4 +1,14 @@
-@import '../partials';
+@import './partials';
+
+.centered-content {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.centered-content-small {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 .hero-section {
   background: $color-lightest-bg;

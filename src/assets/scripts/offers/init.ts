@@ -1,8 +1,8 @@
-import '../../styles/sections/offers.scss';
+import '../../styles/offers/index.scss';
 
 import { render } from 'mustache';
 import type { Offer } from './types';
-import { formatPrice, sortOffers } from './helpers';
+import { formatPrice, sortOffers, logError } from './helpers';
 import { fetchOffers } from './fetch';
 
 const MIN_ADDRESS_LENGTH = 5;
@@ -14,7 +14,7 @@ const messages = {
   addressErrorLetters: `Address needs to contain at least ${MIN_ADDRESS_LENGTH} letters.`,
   addressErrorNumber: 'Address must include a number.',
   addressErrorSpace: 'Address must include a space.',
-  addressNoOffers: 'No offers were found for the provided address, please try again.',
+  addressNoOffers: 'No offers were found for the provided address, please try a different one.',
 };
 
 /**
@@ -42,29 +42,54 @@ const validateAddress = (address: string): string => {
   return '';
 };
 
+const getResultsEl = (): HTMLElement | null => {
+  const resultsEl = document.getElementById('js-offer-results');
+  if (resultsEl === null) {
+    logError('Could not find results DOM element.');
+    return null;
+  }
+
+  return resultsEl;
+};
+
+/**
+ * Render specified number of loading elements.
+ * @param numElements
+ */
+const renderLoading = (numElements: number): void => {
+  const resultsEl = getResultsEl();
+  const loadingEl = document.getElementById('js-offer-loading-template');
+  if (resultsEl === null || loadingEl === null) {
+    return;
+  }
+
+  resultsEl.innerHTML = Array.from({ length: numElements })
+    .map(() => loadingEl.innerHTML)
+    .join('');
+};
+
 /**
  * Insert provided offers in DOM.
  */
 const renderOffers = (offers: Offer[]): void => {
-  const offersEl = document.getElementById('js-offer-cards');
+  const resultsEl = getResultsEl();
   const offerTemplateEl = document.getElementById('js-offer-template');
-  if (offersEl === null || offerTemplateEl === null) {
+  if (resultsEl === null || offerTemplateEl === null) {
     return;
   }
 
   if (offers.length === 0) {
-    offersEl.innerHTML = `<div class="no-offers">${messages.addressNoOffers}</div>`;
+    resultsEl.innerHTML = `<div class="no-offers">${messages.addressNoOffers}</div>`;
     return;
   }
 
   // Clear previous results
-  offersEl.innerHTML = '';
+  resultsEl.innerHTML = '';
 
-  // TODO: In the end, check if it would help to fetch external template
   const offerTemplate = offerTemplateEl.innerHTML;
 
   sortOffers(offers).forEach((offer, i) => {
-    offersEl.innerHTML += render(offerTemplate, {
+    resultsEl.innerHTML += render(offerTemplate, {
       name: offer.name,
       price: formatPrice(offer.price),
       description: offer.description,
@@ -77,8 +102,8 @@ const renderOffers = (offers: Offer[]): void => {
 /**
  * Handle events in offers DOM.
  */
-const handleOffersEvents = (offersEl: HTMLDivElement): void => {
-  const readMoreBtn = offersEl.closest('.js-toggle-description');
+const handleOffersEvents = (resultsEl: HTMLDivElement): void => {
+  const readMoreBtn = resultsEl.closest('.js-toggle-description');
   if (readMoreBtn === null) {
     return;
   }
@@ -104,9 +129,6 @@ const handleOffersEvents = (offersEl: HTMLDivElement): void => {
   readMoreBtn.setAttribute('aria-expanded', String(isExpanded));
 };
 
-/**
- * Clear or set new address error message.
- */
 const updateErrorEl = (message: string): void => {
   const errorsEl = document.getElementById('js-address-errors');
   if (errorsEl === null) {
@@ -116,9 +138,7 @@ const updateErrorEl = (message: string): void => {
   errorsEl.innerHTML = message === '' ? '' : `<p>${message}</p>`;
 };
 
-/**
- * Handle submitting address.
- */
+let lastOfferCount = 0;
 const handleAddressSubmit = async (address: string): Promise<void> => {
   // Clear previous error
   updateErrorEl('');
@@ -129,21 +149,26 @@ const handleAddressSubmit = async (address: string): Promise<void> => {
     return;
   }
 
-  const offers = await fetchOffers(address);
-  if (!offers.success) {
-    updateErrorEl(offers.error);
+  const numLoadingElements = Math.max(lastOfferCount, 1);
+  renderLoading(numLoadingElements);
+
+  const response = await fetchOffers(address);
+  if (!response.success) {
+    updateErrorEl(response.error);
     return;
   }
 
-  renderOffers(offers.data);
+  // Used in next call to keep same number of loading elements
+  lastOfferCount = response.data.length;
+
+  renderOffers(response.data);
 };
 
 export function initOffers(): void {
   const addressFormEl = document.getElementById('js-address-form') as HTMLFormElement | null;
   const addressInputEl = document.getElementById('js-address-input-field') as HTMLInputElement | null;
-  const offersEl = document.getElementById('js-offer-cards');
 
-  if (addressFormEl === null || addressInputEl === null || offersEl === null) {
+  if (addressFormEl === null || addressInputEl === null) {
     return;
   }
 
@@ -154,7 +179,7 @@ export function initOffers(): void {
   });
 
   // Add event listener only once
-  offersEl.addEventListener('click', (event) => {
+  getResultsEl()?.addEventListener('click', (event) => {
     handleOffersEvents(event.target as HTMLDivElement);
   });
 }

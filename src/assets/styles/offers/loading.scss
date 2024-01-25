@@ -1,0 +1,37 @@
+@import '../partials';
+
+.skeleton-loading {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.skeleton-el {
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 800px 104px;
+  animation: skeleton-loading-shimmer 1.5s infinite linear;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background: #eee;
+  }
+}
+
+.skeleton-el-long {
+  height: 24px;
+  width: 90%;
+}
+
+.skeleton-el-big {
+  height: 76px;
+  width: 60%;
+  margin-bottom: 2rem;
+}
+
+.skeleton-el-cta {
+  height: 40px;
+  border-radius: 20px;
+  width: 150px;
+}

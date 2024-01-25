@@ -98,7 +98,9 @@
                         <div id="js-address-errors" class="address-errors"></div>
                     </form>
                 </div>
-                <div class="centered-content offer-cards" id="js-offer-cards"></div>
+                <div class="centered-content offer-results" id="js-offer-results">
+                    <!-- Loaded after search -->
+                </div>
                 <script id="js-offer-template" type="text/x-mustache-template">
                     <div class="offer-card{{#isHighlighted}} is-highlighted{{/isHighlighted}} js-offer">
                         <h3>{{name}}</h3>
@@ -117,6 +119,13 @@
                         <div class="offer-cta">
                             <a class="btn order-btn" href="https://example.com/order" target="_blank">Order Now</a>
                         </div>
+                    </div>
+                </script>
+                <script id="js-offer-loading-template" type="text/template">
+                    <div class="offer-card skeleton-loading">
+                        <div class="skeleton-el skeleton-el-long"></div>
+                        <div class="skeleton-el skeleton-el-big"></div>
+                        <div class="skeleton-el skeleton-el-cta"></div>
                     </div>
                 </script>
             </section>

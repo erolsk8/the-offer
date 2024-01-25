@@ -3,7 +3,7 @@ const ACTIVE_CLASS = 'is-active';
 const getNavEl = (): HTMLElement | null => {
   const nav = document.getElementById('js-main-nav');
   if (nav === null) {
-    console.error('Main navigation element not found');
+    console.error('Main navigation element not found.');
     return null;
   }
 
@@ -25,7 +25,7 @@ export function initMenu(): void {
   window.addEventListener('DOMContentLoaded', () => {
     const toggleMobileMenu = document.getElementById('js-toggle-mobile-menu');
     if (toggleMobileMenu === null) {
-      console.error('DOM element for toggling mobile menu not found');
+      console.error('DOM element for toggling mobile menu not found.');
       return;
     }
     toggleMobileMenu.addEventListener('click', toggleNav);
@@ -33,7 +33,7 @@ export function initMenu(): void {
     // Close menu on X icon click
     const closeMobileMenu = document.getElementById('js-close-mobile-menu');
     if (closeMobileMenu === null) {
-      console.error('DOM element for closing mobile menu not found');
+      console.error('DOM element for closing mobile menu not found.');
       return;
     }
     closeMobileMenu.addEventListener('click', closeNav);
