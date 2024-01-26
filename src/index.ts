@@ -1,8 +1,6 @@
 import './assets/styles/index.scss';
 
-import { initMenu } from './assets/scripts/header';
-
-initMenu();
+import { MobileMenu } from './assets/scripts/mobile-menu';
 
 /**
  * Use dynamic import for content below the fold.
@@ -17,6 +15,12 @@ const handleDynamicImports = async (): Promise<void> => {
   import('./assets/scripts/footer-style');
 };
 
+/**
+ * Main starting point.
+ */
 window.addEventListener('DOMContentLoaded', () => {
+  const mobileMenu = new MobileMenu();
+  mobileMenu.init();
+
   void handleDynamicImports();
 });
