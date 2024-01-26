@@ -46,6 +46,9 @@ Following scripts are available:
   - Runs ESLint and Stylelint to check for any linting errors in JS/TS and CSS/SCSS files. 
   - This script helps maintain code quality and consistency.
 
+* `npm run test`
+  - Runs Jest unit tests
+
 * `npm run prepare`
   - Runs automatically on `npm install`, so manual calls are needed when making Husky changes.
   - Installs Husky, setting up Git hooks (pre-commit) to automate tasks like linting before commits. 

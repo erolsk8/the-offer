@@ -22,6 +22,12 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
+    {
+      files: ['*.spec.ts'],
+      env: {
+        jest: true,
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',

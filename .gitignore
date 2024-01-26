@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# Test overage output
+coverage/
+
 # IDE and Editor folders
 .idea/
 .vscode/
