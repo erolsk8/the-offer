@@ -14,7 +14,7 @@ const handleDynamicImports = async (): Promise<void> => {
   offers.initOffers();
 
   // Footer
-  import('./assets/scripts/footer');
+  import('./assets/scripts/footer-style');
 };
 
 window.addEventListener('DOMContentLoaded', () => {
