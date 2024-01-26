@@ -3,8 +3,6 @@ import { render } from 'mustache';
 import { logError } from './logger';
 import { messages } from './messages';
 
-// TODO: separate offer class?
-
 export class Renderer {
   private resultsEl?: HTMLElement;
   private errorsEl?: HTMLElement;
