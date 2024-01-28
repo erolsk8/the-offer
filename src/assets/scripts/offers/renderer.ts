@@ -52,18 +52,29 @@ export class Renderer {
   }
 
   /**
-   * Render new error message or just clear if empty.
+   * Render new error message.
    */
   public renderError(message: string): void {
     if (this.errorsEl === undefined) {
       return;
     }
 
-    this.errorsEl.innerHTML = message === '' ? '' : `<p>${message}</p>`;
+    this.errorsEl.innerHTML = `<p>${message}</p>`;
   }
 
   /**
-   * Render specified number of loading elements (at least one, but could be 2, 3, etc.).
+   * Clear error message.
+   */
+  public clearError(): void {
+    if (this.errorsEl === undefined) {
+      return;
+    }
+
+    this.errorsEl.innerHTML = '';
+  }
+
+  /**
+   * Render specified number of loading elements but show at least one.
    */
   public renderLoading(numElements: number): void {
     if (this.resultsEl === undefined || this.loadingEl === undefined) {
@@ -72,9 +83,23 @@ export class Renderer {
 
     const loadingTemplate = this.loadingEl.innerHTML;
 
-    this.resultsEl.innerHTML = Array.from({ length: numElements })
+    this.resultsEl.innerHTML = Array.from({
+      // At least one
+      length: Math.max(numElements, 1),
+    })
       .map(() => loadingTemplate)
       .join('');
+  }
+
+  /**
+   * Clear loading indicator.
+   */
+  public clearLoading(): void {
+    if (this.resultsEl === undefined) {
+      return;
+    }
+
+    this.resultsEl.innerHTML = '';
   }
 
   /**

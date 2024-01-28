@@ -1,6 +1,5 @@
-import { debounce } from './debounce';
 import { fetchOffers } from './fetch';
-import { messages } from './messages';
+import { validateAddress } from './validation';
 import { logError } from './logger';
 import type { Renderer } from './renderer';
 
@@ -12,6 +11,8 @@ export class FormHandler {
   private submitButtonEl?: HTMLButtonElement;
 
   private isDomReady = false;
+
+  private isSubmitting = false;
 
   /**
    * Used in next call to keep same number of loading elements.
@@ -50,7 +51,7 @@ export class FormHandler {
       return;
     }
     if (this.submitButtonEl === undefined) {
-      logError('FormHandler submit DOM not found.');
+      logError('FormHandler submit button DOM not found.');
       return;
     }
 
@@ -58,90 +59,65 @@ export class FormHandler {
   }
 
   /**
-   * Get error message if address validation does not meet requirements:
-   * - minimum required letters length,
-   * - at least one number, and
-   * - one space.
+   * Validate address and fetch offers.
    */
-  private validateAddress(address: string): string {
-    const MIN_ADDRESS_LENGTH = 5;
-
-    // Actual letters (without spaces or special characters)
-    const letters = address.match(/\p{L}/gu)?.length ?? 0;
-    if (letters < MIN_ADDRESS_LENGTH) {
-      return messages.addressErrorLetters.replace('{{min}}', MIN_ADDRESS_LENGTH.toString());
-    }
-
-    if (!/\d/.test(address)) {
-      return messages.addressErrorNumber;
-    }
-
-    if (!/\s/.test(address.trim())) {
-      return messages.addressErrorSpace;
-    }
-
-    // Empty string indicates a valid address
-    return '';
-  }
-
-  /**
-   * Process newly submitted address.
-   */
-  private async onSubmit(address: string): Promise<void> {
+  private async processAddress(address: string): Promise<void> {
     // Clear previous error
-    this.renderer.renderError('');
+    this.renderer.clearError();
 
-    const validationError = this.validateAddress(address);
+    // Handle client side validation
+    const validationError = validateAddress(address);
     if (validationError !== '') {
       this.renderer.renderError(validationError);
       return;
     }
 
-    // Render at least 1 loading element - but keep previous number if there were more offers
-    const numLoadingElements = Math.max(this.lastOfferCount, 1);
-    this.renderer.renderLoading(numLoadingElements);
+    // Show loading, keeping previous number of offers
+    this.renderer.renderLoading(this.lastOfferCount);
 
+    // Fetch offers for submitter address
     const response = await fetchOffers(address);
     if (!response.success) {
       this.renderer.renderError(response.error);
+      this.renderer.clearLoading();
       return;
     }
 
-    this.renderer.renderOffers(response.data);
+    this.renderer.clearLoading();
 
+    // Preserve latest successful count
     this.lastOfferCount = response.data.length;
+
+    // Show results
+    this.renderer.renderOffers(response.data);
   }
 
   /**
-   * Disable submit button and therefor form submission.
+   * Process newly submitted address.
    */
-  private setDisabledState(isDisabled: boolean): void {
-    if (this.submitButtonEl === undefined) {
+  private async handleSubmit(): Promise<void> {
+    if (this.isSubmitting || this.submitButtonEl === undefined || this.addressInputEl === undefined) {
       return;
     }
-    this.submitButtonEl.disabled = isDisabled;
+
+    // Disable submitting
+    this.isSubmitting = true;
+    this.submitButtonEl.disabled = true;
+
+    await this.processAddress(this.addressInputEl.value);
+
+    // Enable submitting
+    this.submitButtonEl.disabled = false;
+    this.isSubmitting = false;
   }
 
   private setupEventHandlers(): void {
-    if (this.addressFormEl === undefined || this.addressInputEl === undefined) {
-      return;
-    }
+    if (this.addressFormEl !== undefined) {
+      this.addressFormEl.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    const addressInputEl = this.addressInputEl;
-
-    this.addressFormEl.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      this.setDisabledState(true);
-
-      const debounceSubmit = debounce(() => {
-        // Process submitted address
-        void this.onSubmit(addressInputEl.value);
-      }, 500);
-
-      void debounceSubmit().then(() => {
-        this.setDisabledState(false);
+        void this.handleSubmit();
       });
-    });
+    }
   }
 }

@@ -1,17 +1,10 @@
 import type { Offer, OfferResponseFailure, OfferFetchFailureResult, OfferFetchSuccessResult } from './types';
 import { logError, logResponseError } from './logger';
+import { simulateDelay } from './delay';
 import { messages } from './messages';
 
 // Would normally come from .env file or some other config
 const API_SERVER_BASE_URL = 'http://localhost:8000';
-
-/**
- * Simple random delay up to 3 seconds.
- */
-const simulateDelay = async (): Promise<void> => {
-  const delay = Math.random() * 3000;
-  await new Promise((resolve) => setTimeout(resolve, delay));
-};
 
 /**
  * Fetch offers and log errors.
@@ -26,8 +19,9 @@ export async function fetchOffers(address: string): Promise<OfferFetchSuccessRes
       },
     });
 
-    const isJson = res.headers.get('Content-Type')?.includes('application/json');
-    if (isJson !== true) {
+    const contentType = res.headers.get('Content-Type');
+    const isJson = typeof contentType === 'string' && contentType.includes('application/json');
+    if (!isJson) {
       const textData = await res.text();
       logResponseError(res, 'Received invalid response type.', { textData });
 
@@ -37,17 +31,9 @@ export async function fetchOffers(address: string): Promise<OfferFetchSuccessRes
       };
     }
 
-    if (!res.ok) {
-      logResponseError(res, 'Response was not ok.');
-
-      return {
-        success: false,
-        error: messages.fetchErrorGeneral,
-      };
-    }
-
-    if (res.status !== 200) {
+    if (!res.ok || res.status !== 200) {
       const errorRes: OfferResponseFailure = await res.json();
+
       const { code, description } = errorRes;
 
       logResponseError(res, 'Response returned error.', { code, description });
