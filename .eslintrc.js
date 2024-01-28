@@ -27,6 +27,9 @@ module.exports = {
       env: {
         jest: true,
       },
+      rules: {
+        '@typescript-eslint/unbound-method': 'off',
+      },
     },
   ],
   parserOptions: {

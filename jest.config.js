@@ -9,6 +9,7 @@ const config = {
   testEnvironment: 'jsdom',
   coverageReporters: ['html'],
   collectCoverageFrom: ['src/**', '!src/**/*.d.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
 
 module.exports = config;
