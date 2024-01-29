@@ -17,7 +17,7 @@
                 </div>
                 <nav class="nav" id="js-main-nav">
                     <div class="close-menu-holder">
-                        <button class="menu-control" id="js-close-mobile-menu" aria-label="Close menu">
+                        <button class="menu-control" id="js-close-mobile-menu" aria-label="Close menu" aria-controls="js-main-nav">
                             <img src="images/xmark.svg" alt="Close menu icon" width="32" height="32" />
                         </button>
                     </div>
@@ -33,7 +33,7 @@
                         </li>
                     </ul>
                 </nav>
-                <button class="menu-control" id="js-toggle-mobile-menu" aria-label="Toggle menu">
+                <button class="menu-control" id="js-toggle-mobile-menu" aria-label="Toggle menu" aria-controls="js-main-nav">
                     <img src="images/menu.svg" alt="Toggle menu icon" width="24" height="24" />
                 </button>
             </div>
@@ -94,7 +94,11 @@
                     <div class="offer-card{{#isHighlighted}} is-highlighted{{/isHighlighted}} js-offer">
                         <h3>{{name}}</h3>
                         <div class="offer-price"><span>{{price}}</span> / month</div>
-                        <button class="read-more-button js-toggle-description" aria-expanded="false">
+                        <button
+                            class="read-more-button js-toggle-description"
+                            aria-expanded="false"
+                            aria-controls="description-{{id}}"
+                        >
                             Learn More
                             <img
                                 class="toggle-icon js-toggle-icon"
@@ -104,7 +108,7 @@
                                 height="24"
                             />
                         </button>
-                        <div class="offer-description js-description"><p>{{description}}</p></div>
+                        <div class="offer-description js-description" id="description-{{id}}"><p>{{description}}</p></div>
                         <div class="offer-cta">
                             <a class="btn order-btn" href="https://www.google.com" target="_blank" rel="noopener">Order Now</a>
                         </div>

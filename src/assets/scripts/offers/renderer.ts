@@ -123,6 +123,7 @@ export class Renderer {
     this.resultsEl.innerHTML = this.sortOffers(offers)
       .map((offer, i) =>
         render(offerTemplate, {
+          id: `offer-${i + 1}`,
           name: offer.name,
           price: this.formatPrice(offer.price),
           description: offer.description,
