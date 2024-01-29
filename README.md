@@ -42,12 +42,20 @@ Following scripts are available:
   - Useful for testing the production build locally.
   - Served at http://localhost:8002.
 
+* `npm run test`
+  - Runs Jest unit tests.
+
+* `npm run e2e`
+  - Runs e2e tests in background (headless).
+  - Requires running `build` and `serve` commands first.
+
+* `npm run e2e:ui`
+  - Starts e2e UI where tests can be executed manually, watched, debugged, etc.
+  - Requires running `build` and `serve` commands first.
+  
 * `npm run lint`
   - Runs ESLint and Stylelint to check for any linting errors in JS/TS and CSS/SCSS files. 
   - This script helps maintain code quality and consistency.
-
-* `npm run test`
-  - Runs Jest unit tests
 
 * `npm run prepare`
   - Runs automatically on `npm install`, so manual calls are needed when making Husky changes.

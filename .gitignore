@@ -7,6 +7,9 @@ dist/
 # Test overage output
 coverage/
 
+# Default e2d tests output
+test-results/
+
 # IDE and Editor folders
 .idea/
 .vscode/
