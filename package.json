@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "serve": "node server/serve.js",
     "lint": "eslint 'src/**/*.ts' 'server/**/*.js' && stylelint 'src/**/*.scss'",
-    "test": "jest",
+    "test": "jest --testPathPattern=src",
     "e2e": "npx playwright test",
     "e2e:ui": "npx playwright test --ui",
     "prepare": "husky install"
