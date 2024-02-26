@@ -1,6 +1,6 @@
 # The Offer
 
-Tiny demo / example for a frontend developer position. Showcasing:
+Tiny demo/example showcasing:
 * Simple web app built using TypeScript and SCSS consisting of:
   - Header
   - Footer
@@ -12,6 +12,7 @@ Tiny demo / example for a frontend developer position. Showcasing:
   - dev server (Webpack)
   - basic server to host distributed version (Node.js) 
   - linting and pre-commit validation (ESLint, Stylelint, Prettier...)
+  - deployment to GitHub Pages
 
 ### Requirements
 
