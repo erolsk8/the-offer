@@ -1,17 +1,19 @@
-# Coding Challenge: Drei Austria - Erol
+# The Offer
 
-This is a solution to the Coding Challenge, made as part of the recruitment process for the Web Front End Developer position.
+Tiny demo / example for a frontend developer position. Showcasing:
+* Simple web app built using TypeScript and SCSS consisting of:
+  - Header
+  - Footer
+  - Main section with search field making requests to the backend and showing results 
+* A few tests: 
+  - unit (Jest) 
+  - e2e (Playwright)
+* Development environment 
+  - dev server (Webpack)
+  - basic server to host distributed version (Node.js) 
+  - linting and pre-commit validation (ESLint, Stylelint, Prettier...)
 
 ### Requirements
-
-#### API Server
-
-Use https://github.com/danielgtaylor/apisprout docker image to quickly setup the API server:
-
-1. install Docker from https://www.docker.com/
-2. pull the image: `docker pull danielgtaylor/apisprout`
-3. start the API server: `docker run -p 8000:8000 -v /Users/andr/Desktop/api.yaml:/api.yaml danielgtaylor/apisprout /api.yaml`, replacing `/Users/andr/Desktop/api.yaml` with the according full path to api.yaml on your machine. 
-4. Call the API from your frontend app: "http://localhost:8000/offers"
 
 #### Node.js
 
