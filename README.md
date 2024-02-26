@@ -1,10 +1,14 @@
 # The Offer
 
+Demo: https://offer.erl.pw
+
 Tiny demo/example showcasing:
 * Simple web app built using TypeScript and SCSS consisting of:
-  - Header
-  - Footer
-  - Main section with search field making requests to the backend and showing results 
+  - Header and Footer with random/dummy links
+  - Section with search field making requests and showing results 
+    + with basic address field validation
+    + there is simulated 1-3 seconds delay
+    + backend API returns random results (0, 1, or 2). 
 * A few tests: 
   - unit (Jest) 
   - e2e (Playwright)
